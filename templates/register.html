@@ -1,32 +1,136 @@
-<form method="POST" action="/register">
-    {{ form.hidden_tag() }}
-    <div>
-        {{ form.username.label }}<br>
-        {{ form.username(size=32) }}<br>
-        {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span><br>
-        {% endfor %}
-    </div>
-    <div>
-        {{ form.email.label }}<br>
-        {{ form.email(size=32) }}<br>
-        {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span><br>
-        {% endfor %}
-    </div>
-    <div>
-        {{ form.password.label }}<br>
-        {{ form.password(size=32) }}<br>
-        {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span><br>
-        {% endfor %}
-    </div>
-    <div>
-        {{ form.confirm_password.label }}<br>
-        {{ form.confirm_password(size=32) }}<br>
-        {% for error in form.confirm_password.errors %}
-            <span style="color: red;">[{{ error }}]</span><br>
-        {% endfor %}
-    </div>
-    <div>
-        {{ form.submit() }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            width: 350px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        input:focus {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.02);
+            transition: 0.3s;
+        }
+
+        label {
+            font-size: 14px;
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 12px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #00c6ff;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0,198,255,0.7);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="form-container">
+    <h2>🚀 Create Account</h2>
+
+    <form method="POST" action="/register">
+        {{ form.hidden_tag() }}
+
+        <div class="input-group">
+            {{ form.username.label }}
+            {{ form.username() }}
+            {% for error in form.username.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="input-group">
+            {{ form.email.label }}
+            {{ form.email() }}
+            {% for error in form.email.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="input-group">
+            {{ form.password.label }}
+            {{ form.password() }}
+            {% for error in form.password.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="input-group">
+            {{ form.confirm_password.label }}
+            {{ form.confirm_password() }}
+            {% for error in form.confirm_password.errors %}
+                <div class="error">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        {{ form.submit(class="btn") }}
+    </form>
+</div>
+
+</body>
+</html>
